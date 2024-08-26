@@ -45,7 +45,7 @@
 #include <QColorDialog>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include "QVTKWidget.h"
+#include <QVTKOpenGLNativeWidget.h>
 #include <vtkRenderWindow.h>
 #include <QTextEdit>
 #include <QTime>

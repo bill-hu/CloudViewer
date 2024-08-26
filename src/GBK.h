@@ -2,7 +2,7 @@
 #define _QT_GBK_H
 
 #include <QString>
-#include <QTextCodec>
+#include <QtCore5Compat/QTextCodec>
 #include <string>
 using std::string;
 

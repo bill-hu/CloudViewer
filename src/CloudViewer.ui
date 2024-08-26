@@ -52,7 +52,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_5">
     <item>
-     <widget class="QVTKWidget" name="screen">
+     <widget class="QVTKOpenGLNativeWidget" name="screen" native="true">
       <property name="minimumSize">
        <size>
         <width>600</width>
@@ -69,7 +69,7 @@
      <x>0</x>
      <y>0</y>
      <width>1246</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="font">
@@ -648,6 +648,7 @@
        </property>
        <property name="font">
         <font>
+         <family>微软雅黑</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -708,14 +709,14 @@
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>25</number>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>100</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>true</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>25</number>
        </attribute>
        <attribute name="horizontalHeaderStretchLastSection">
         <bool>true</bool>
@@ -1127,9 +1128,10 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QVTKWidget</class>
+   <class>QVTKOpenGLNativeWidget</class>
    <extends>QWidget</extends>
-   <header>QVTKWidget.h</header>
+   <header>QVTKOpenGLNativeWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

@@ -8,8 +8,8 @@ set(CMAKE_AUTORCC ON) # resource files
 set(CMAKE_AUTOUIC ON) # UI files
 
 # find package
-find_package(Qt5 REQUIRED Widgets)
-find_package(PCL 1.7.1 REQUIRED)
+find_package(Qt6 REQUIRED Widgets)
+find_package(PCL)
 
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
@@ -23,7 +23,7 @@ file(GLOB_RECURSE DIR_UIS     ${CMAKE_CURRENT_SOURCE_DIR}/*.ui)
 
 # add resource
 set(RESOURCE ${CMAKE_CURRENT_SOURCE_DIR}/CloudViewer.qrc)
-qt5_add_resources(RESOURCE_ADDED ${RESOURCE})
+qt6_add_resources(RESOURCE_ADDED ${RESOURCE})
 
 add_executable(${PROJECT_NAME}
     ${DIR_SRCS}
@@ -34,5 +34,5 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     ${PCL_LIBRARIES}
-    Qt5::Widgets
+    Qt6::Widgets
 )

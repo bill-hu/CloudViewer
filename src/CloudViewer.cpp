@@ -1,5 +1,5 @@
 #include "CloudViewer.h"
-
+#include <vtkGenericOpenGLRenderWindow.h>
 CloudViewer::CloudViewer(QWidget *parent)
   : QMainWindow(parent) {
   ui.setupUi(this);
@@ -320,11 +320,16 @@ void CloudViewer::initial() {
   // 点云初始化
   mycloud.cloud.reset(new PointCloudT);
   mycloud.cloud->resize(1);
-  viewer.reset(new pcl::visualization::PCLVisualizer("viewer", false));
+  auto renderer = vtkSmartPointer<vtkRenderer>::New();
+
+  auto renderWindow = vtkSmartPointer<vtkGenericOpenGLRenderWindow>::New();
+
+  renderWindow->AddRenderer(renderer);
+  viewer.reset(new pcl::visualization::PCLVisualizer(renderer, renderWindow, "viewer", false));
   // viewer->addPointCloud(cloud, "cloud");
 
-  ui.screen->SetRenderWindow(viewer->getRenderWindow());
-  viewer->setupInteractor(ui.screen->GetInteractor(), ui.screen->GetRenderWindow());
+  ui.screen->setRenderWindow(viewer->getRenderWindow());
+  viewer->setupInteractor(ui.screen->interactor(), viewer->getRenderWindow());
   ui.screen->update();
 
   ui.propertyTable->setSelectionMode(QAbstractItemView::NoSelection); // 禁止点击属性管理器的 item
@@ -438,8 +443,8 @@ void CloudViewer::changeTheme() {
     case CLOUDVIEWER_THEME_WINDOWS: {
       qss = windows_qss;
       for (int i = 0; i != mycloud_vec.size(); i++){
-        if (ui.dataTree->topLevelItem(i)->textColor(0) == colorLight){
-          ui.dataTree->topLevelItem(i)->setTextColor(0, colorDark);
+        if (ui.dataTree->topLevelItem(i)->foreground(0) == colorLight){
+          ui.dataTree->topLevelItem(i)->setForeground(0, colorDark);
         }
       }
       theme_id = 0;
@@ -449,8 +454,8 @@ void CloudViewer::changeTheme() {
     case CLOUDVIEWER_THEME_DARCULA: {
       qss = darcula_qss;
       for (int i = 0; i != mycloud_vec.size(); i++){
-        if (ui.dataTree->topLevelItem(i)->textColor(0) == colorDark){
-          ui.dataTree->topLevelItem(i)->setTextColor(0, colorLight);
+        if (ui.dataTree->topLevelItem(i)->foreground(0) == colorDark){
+          ui.dataTree->topLevelItem(i)->setForeground(0, colorLight);
         }
       }
       consoleLog("Change theme", "Darcula theme", "", "");
@@ -906,7 +911,7 @@ void CloudViewer::hideItem() {
     // QMessageBox::information(this, "cloud_id", QString::fromLocal8Bit(cloud_id.c_str()));
 
     QColor item_color = QColor(112, 122, 132, 255);
-    curItem->setTextColor(0, item_color);
+    curItem->setForeground(0, item_color);
     mycloud_vec[id].visible = false;
   }
 
@@ -932,7 +937,7 @@ void CloudViewer::showItem() {
     else{
       item_color = QColor(241, 241, 241, 255);
     }
-    curItem->setTextColor(0, item_color);
+    curItem->setForeground(0, item_color);
     mycloud_vec[id].visible = true;
   }
 

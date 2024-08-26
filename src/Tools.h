@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <QTime>
+#include <QElapsedTimer>
 #include <QString>
 
 using std::string;

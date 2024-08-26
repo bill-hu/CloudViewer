@@ -5,6 +5,7 @@
 #include <pcl/search/kdtree.h>
 #include <pcl/surface/gp3.h>
 #include <pcl/PolygonMesh.h>
+#include <pcl/common/io.h>
 #include <vector>
 
 // 计算三角形面积，接收三个角度的 xyz 坐标，返回面积
@@ -36,7 +37,7 @@ double calculatePCLPolygonMeshArea(const pcl::PolygonMesh& mesh) {
   // for each polygon
   for (size_t i = 0; i != mesh.polygons.size(); ++i) {
 
-    std::vector<uint32_t> vertexIndexes = mesh.polygons[i].vertices;
+    std::vector<int32_t> vertexIndexes = mesh.polygons[i].vertices;
     int n = vertexIndexes.size();  // n 边形
 
     // 将一个 n 边形分解为 (n - 2) 个三角形

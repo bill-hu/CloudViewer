@@ -1,6 +1,6 @@
 #include "Tools.h"
 
-QTime myTime;
+QElapsedTimer myTime;
 
 Tools::Tools()
 {
